@@ -2,7 +2,6 @@
 
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
-yabai -m signal --add event=application_launched app="Safari" action="yabai -m window --toggle native-fullscreen"
 
 # yabai -m config external_bar all:26:0
 
@@ -13,7 +12,7 @@ yabai -m config window_placement                second_child
 yabai -m config window_topmost                  off
 yabai -m config window_shadow                   float
 yabai -m config window_border                   off
-yabai -m config window_border_width             10
+yabai -m config window_border_width             4
 yabai -m config active_window_border_color      0xB2EBDBB2
 yabai -m config normal_window_border_color      0xB2282828
 yabai -m config window_opacity                  on
@@ -36,7 +35,7 @@ yabai -m config window_gap                      0
 yabai -m space 1 --label "Primary"
 yabai -m space 2 --label "Masters"
 yabai -m space 3 --label "Tools"
-yabai -m space 4 --label "Media"
+yabai -m space 4 --label "Fun"
 
 # Space config
 # yabai -m config --space 4 layout float
@@ -45,24 +44,30 @@ yabai -m space 4 --label "Media"
 yabai -m rule --add app="^System Preferences$"  manage=off border=off
 
 # Primary
-yabai -m rule --add app="Preview"               space=1
-yabai -m rule --add app="Zoom"                  space=1
-yabai -m rule --add app="Finder"                space=1
+yabai -m rule --add app="Preview"               space=Primary
+yabai -m rule --add app="Zoom"                  space=Primary
+yabai -m rule --add app="Finder"                space=Primary
 
 
 # Masters
-yabai -m rule --add app="GoodNotes"             space=2
-yabai -m rule --add app="Microsoft OneNote"     space=2
+yabai -m rule --add app="GoodNotes"             space=Masters
+yabai -m rule --add app="Microsoft OneNote"     space=Masters
 
 # Tools
-yabai -m rule --add app="Terminal"              space=3
-yabai -m rule --add app="VimR"                  space=3
-yabai -m rule --add app="Sublime Text"          space=3
-yabai -m rule --add app="PyCharm"          		space=3
+yabai -m rule --add app="Terminal"              space=Tools
+yabai -m rule --add app="VimR"                  space=Tools
+yabai -m rule --add app="Sublime Text"          space=Tools
+yabai -m rule --add app="PyCharm"          		space=Tools
 
-# Media
-yabai -m rule --add app="IINA"                  space=4
-yabai -m rule --add app="Spotify"               space=4
-yabai -m rule --add app="WhatsApp"              space=4
-yabai -m rule --add app="Safari"                space=4
-yabai -m rule --add app="Telegram"              space=4
+# Fun
+yabai -m rule --add app="IINA"                  space=Fun
+yabai -m rule --add app="Spotify"               space=Fun
+yabai -m rule --add app="WhatsApp"              space=Fun
+yabai -m rule --add app="Safari"                space=Fun
+yabai -m rule --add app="Telegram"              space=Fun
+
+# yabai -m signal --add event=display_added   action="yabai -m space Tools --display 2 && yabai -m space Fun --display 2"
+# yabai -m signal --add event=display_removed action="yabai -m space Tools --display 1 && yabai -m space Fun --display 1"
+# yabai -m signal --add event=display_removed action="yabai -m space Tools --destroy;yabai -m space Fun --destroy;yabai -m space Masters --create --display=1 && yabai -m space Tools --create --display=1;"
+# yabai -m signal --add event=display_removed action="yabai -m space Tools --destroy;yabai -m space Fun --destroy;yabai -m space --create --display=2 && yabai -m space Tools --create --display=2;"
+# yabai -m signal --add event=application_launched app="Safari" action="yabai -m window --toggle native-fullscreen"
