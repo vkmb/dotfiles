@@ -3,7 +3,8 @@
 sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 
-# yabai -m config external_bar all:26:0
+SPACEBAR_HEIGHT=$(spacebar -m config height)
+yabai -m config external_bar all:$SPACEBAR_HEIGHT:0
 
 # global settings
 yabai -m config mouse_follows_focus             on
@@ -49,11 +50,12 @@ yabai -m rule --add app="Tor Browser"  manage=off border=off
 yabai -m rule --add app="Preview"               space=Primary
 yabai -m rule --add app="Zoom"                  space=Primary
 yabai -m rule --add app="Finder"                space=Primary
-
+yabai -m rule --add app="Safari"                space=Primary
 
 # Masters
 yabai -m rule --add app="GoodNotes"             space=Masters
 yabai -m rule --add app="Microsoft OneNote"     space=Masters
+
 
 # Tools
 yabai -m rule --add app="Terminal"              space=Tools
@@ -65,14 +67,14 @@ yabai -m rule --add app="PyCharm"          		space=Tools
 yabai -m rule --add app="IINA"                  space=Fun
 yabai -m rule --add app="Spotify"               space=Fun
 yabai -m rule --add app="WhatsApp"              space=Fun
-yabai -m rule --add app="Safari"                space=Fun
 yabai -m rule --add app="Telegram"              space=Fun
 
+# Whatever
 yabai -m rule --add app="^System Preferences$"  space=Whatever
 yabai -m rule --add app="Tor Browser"  space=Whatever
 
-# yabai -m signal --add event=display_added   action="yabai -m space Tools --display 2 && yabai -m space Fun --display 2"
-# yabai -m signal --add event=display_removed action="yabai -m space Tools --display 1 && yabai -m space Fun --display 1"
-# yabai -m signal --add event=display_removed action="yabai -m space Tools --destroy;yabai -m space Fun --destroy;yabai -m space Masters --create --display=1 && yabai -m space Tools --create --display=1;"
-# yabai -m signal --add event=display_removed action="yabai -m space Tools --destroy;yabai -m space Fun --destroy;yabai -m space --create --display=2 && yabai -m space Tools --create --display=2;"
-# yabai -m signal --add event=application_launched app="Safari" action="yabai -m window --toggle native-fullscreen"
+# Rules
+yabai -m signal --add event=window_title_changed app="Safari" title="RWTHmoodle" action="yabai -m window --space  Masters && yabai -m space --focus Masters"
+yabai -m signal --add event=window_title_changed app="Safari" title="GitHub" action="yabai -m window --space  Tools && yabai -m space --focus Tools"
+yabai -m signal --add event=window_title_changed app="Safari" title="YouTube" action="yabai -m window --space  Fun && yabai -m space --focus Fun"
+yabai -m signal --add event=window_title_changed app="Safari" title="([A-Z,a-z])*anime" action="yabai -m window --space  Fun && yabai -m space --focus Fun"
