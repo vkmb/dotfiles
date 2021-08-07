@@ -88,3 +88,9 @@ shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
 
 # Right
 shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
+
+##############################################
+# Quickly restart the yabai launch agent
+##############################################
+
+ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
