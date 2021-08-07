@@ -36,12 +36,14 @@ yabai -m space 1 --label "Primary"
 yabai -m space 2 --label "Masters"
 yabai -m space 3 --label "Tools"
 yabai -m space 4 --label "Fun"
+yabai -m space 5 --label "Whatever"
 
 # Space config
-# yabai -m config --space 4 layout float
+yabai -m config --space 5 layout float
 
 # Unmanaged
 yabai -m rule --add app="^System Preferences$"  manage=off border=off
+yabai -m rule --add app="Tor Browser"  manage=off border=off
 
 # Primary
 yabai -m rule --add app="Preview"               space=Primary
@@ -65,6 +67,9 @@ yabai -m rule --add app="Spotify"               space=Fun
 yabai -m rule --add app="WhatsApp"              space=Fun
 yabai -m rule --add app="Safari"                space=Fun
 yabai -m rule --add app="Telegram"              space=Fun
+
+yabai -m rule --add app="^System Preferences$"  space=Whatever
+yabai -m rule --add app="Tor Browser"  space=Whatever
 
 # yabai -m signal --add event=display_added   action="yabai -m space Tools --display 2 && yabai -m space Fun --display 2"
 # yabai -m signal --add event=display_removed action="yabai -m space Tools --display 1 && yabai -m space Fun --display 1"
