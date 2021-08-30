@@ -94,3 +94,30 @@ shift + alt - right  : yabai -m window --grid 1:2:1:0:1:1
 ##############################################
 
 ctrl + alt - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
+##############################################
+# Shortcut to open terminal
+##############################################
+
+ctrl - t : open -a kitty
+
+# Cycle windows forwards
+ralt - 0x1E : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre "add | map(select(.minimized != 1)) | sort_by(.display, .frame.y, .frame.x, .id) | reverse | nth(index(map(select(.focused == 1))) - 1).id" \
+  | xargs -I{} yabai -m window --focus {}
+
+# Cycle windows backwards
+ralt - 0x21 : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre "add | map(select(.minimized != 1)) | sort_by(.display, .frame.y, .frame.y, .id) | nth(index(map(select(.focused == 1))) - 1).id" \
+  | xargs -I{} yabai -m window --focus {}
+
+# Insert stack and unstack in bsp
+ctrl - w : yabai -m window --stack west
+ctrl - e : yabai -m window --stack east
+ctrl - n : yabai -m window --stack north
+ctrl - s : yabai -m window --stack south
+ctrl - z : yabai -m window --warp stack.prev || yabai -m window --warp stack.first 
