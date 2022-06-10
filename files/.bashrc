@@ -47,6 +47,7 @@ USER_PATHS=(
   "$HOME/.dotfiles/scripts" # Personal scripts
   "$HOME/bin"
   "$HOME/.luarocks/bin"
+  "$HOME/.emacs.d/bin"
 )
 
 # Set PATH with ordering: SYS:PATH:USER
@@ -65,7 +66,6 @@ alias ms='tmuxinator-fzf-start.sh'
 alias ssh='TERM=xterm-256color ssh'
 alias t='tmux'
 alias v='nvim'
-alias vs='nvim -S Session.vim'
 
 ################################################################################
 # Bindings #####################################################################
@@ -85,6 +85,6 @@ bind -x '"\C-f":"fg"'
 source $HOME/fzf-marks/fzf-marks.plugin.bash
 
 # Configure starship
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 
 alias luamake=/Users/camspiers/dev/lua-language-server/3rd/luamake/luamake

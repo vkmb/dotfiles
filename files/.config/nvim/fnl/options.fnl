@@ -1,4 +1,4 @@
-(module dotfiles.options {require-macros [dotfiles.macros]})
+(module options {autoload {nvim aniseed.nvim} require-macros [macros]})
 
 (se- background :dark)
 (se- clipboard :unnamed)
@@ -30,12 +30,28 @@
 (se- timeoutlen 500)
 (se- undofile)
 (se- updatetime 300)
+(se- cursorline)
+(se- cursorcolumn)
+(se- history 5000)
+(se- wildignore ".git,.git/*,.DS_Store")
+
+(nvim.command "augroup Custom")
+(nvim.command "autocmd! TermOpen * set nocursorline")
+(nvim.command "autocmd! TermOpen * set nocursorcolumn")
+(nvim.command "autocmd! Filetype fennel setlocal syntax=")
+(nvim.command "augroup END")
+
+(se- grepprg
+     "rg --no-heading --vimgrep --hidden --iglob '!.DS_Store' --iglob '!.git'")
+
+(se- grepformat "%f:%l:%c:%m")
 
 ; globals
-(g mapleader "\\")
 (g maplocalleader ",")
 (g LoupeClearHighlightMap 0)
 (g camelcasemotion_key ",")
+(g netrw_keepdir 0)
+(g netrw_banner 1)
 
 ; theme
 (g tokyonight_style :night)
@@ -46,4 +62,6 @@
 ; commands
 (vim.cmd "syntax enable")
 (vim.cmd "colorscheme tokyonight")
+
+(vim.cmd "au FileType qf setlocal nonumber norelativenumber nocursorline nocursorcolumn colorcolumn=")
 
